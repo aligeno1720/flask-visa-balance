@@ -1,0 +1,170 @@
+============================================================ app.py
+from flask import Flask, render_template
+
+app = Flask(__name__)
+
+@app.route('/')
+def index():
+    return render_template('index.html')  # This will render the HTML file
+
+if __name__ == "__main__":
+    app.run(debug=True)
+
+============================================================ templates/index.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visa Payment</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f6f7f8;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            transition: background-color 0.3s ease;
+        }
+
+        /* Dark Mode Styles */
+        body.dark-mode {
+            background-color: #121212;
+            color: #e0e0e0;
+        }
+
+        /* Content Wrapper */
+        .content {
+            background-color: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        body.dark-mode .content {
+            background-color: #1e1e1e;
+            color: #e0e0e0;
+        }
+
+        h2 {
+            color: #0070ba;
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        p {
+            color: #666;
+            font-size: 16px;
+            margin-bottom: 30px;
+        }
+
+        /* Visa Logo - Adjusted size */
+        .visa-logo {
+            width: 150px;  /* Adjusted width for the Visa logo */
+            margin-bottom: 20px;
+        }
+
+        /* Button Styling */
+        button {
+            background-color: #0070ba;
+            color: white;
+            padding: 15px 30px;
+            font-size: 18px;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #005fa3;
+            transform: scale(1.05);
+        }
+
+        /* Space between Visa and MasterCard buttons */
+        .mastercard-button {
+            margin-top: 20px;
+        }
+
+        /* Dark Mode Toggle Button */
+        .toggle-btn {
+            margin-top: 20px;
+            background-color: #f5f5f5;
+            color: #0070ba;
+            border: 1px solid #0070ba;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .toggle-btn:hover {
+            background-color: #0070ba;
+            color: white;
+        }
+
+        /* Animation */
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .content {
+            animation: slideIn 0.6s ease-out;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Content Wrapper -->
+    <div class="content">
+        <!-- Visa Logo -->
+        <img src="{{ url_for('static', filename='visamastercard.jpg') }}" alt="Visa Logo" class="visa-logo">
+
+        <h2>Check Visa & MasterCard Balance</h2>
+        <p>Click the button below to go to your CARDS account balance page:</p>
+
+        <!-- Button to redirect to Visa balance page -->
+        <a href="https://www.visa.com" target="_blank">
+            <button>Go to Visa Balance</button>
+        </a>
+
+        <!-- Button to redirect to MasterCard balance page with margin -->
+        <a href="https://www.mastercard.com" target="_blank">
+            <button class="mastercard-button">Go to MasterCard Balance</button>
+        </a>
+
+        <!-- Dark Mode Toggle Button -->
+        <button class="toggle-btn" onclick="toggleDarkMode()">Dark Mode</button>
+    </div>
+
+    <script>
+        // Dark Mode Toggle Function
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+        }
+    </script>
+
+</body>
+</html>
+
